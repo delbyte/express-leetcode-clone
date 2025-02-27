@@ -11,7 +11,7 @@ app.get('/route1', (req, res) => {
 })
 
 app.get('/route2', (req, res) => {
-  res.send(<html> <body> <h1>Chat</h1> <h2>Here's an html request being sent from route2. </h2></body></html>)
+  res.send('<html> <body> <h1>Chat</h1> <h2>Here\'s an html request being sent from route2. </h2></body></html>')
 })
 
 
