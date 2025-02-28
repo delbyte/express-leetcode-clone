@@ -4,12 +4,24 @@ const port = 3000
 
 const USERS = [];
 
-const QUESTIONS = {
-  
-};
+const QUESTIONS = [{
+  title: "Two sum", 
+  description: "Given an array containing two numbers, add them up and display the result.",
+  testCases :[{
+    input: "[1,2]",
+    output: "3"
+  }, {
+    input: "[3,4]",
+    output: "7"
+  }]
+}];
+
+const SUBMISSIONS = [{
+
+}];
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello, world!')
 })
 
 app.post('/signup', (req, res) => {
@@ -32,21 +44,30 @@ app.post('/login', (req, res) => {
 
   //IF the pw is the same return 200 back to client and
   //also send back a (user) token (any random string will do for now)
-  //if its not the same return 401 back
+  //if its not the same return 401 back 
 
 })
 
 app.get('/questions', (req, res) => {
+  //Return the user all the questions in the QUESTIONS array
+  
+})
+
+app.get('/submit', (req, res) => {
+  // return the users submission for this problem 
   
 })
 
 app.post('/submit', (req, res) => {
+  // let the users submit a problem, randomly accept or decline the solution
+  //store the submission in the SUBMISSIONS array 
   
 })
 
-app.get('/specificQuestion', (req, res) => {
-  
-})
+//hard todos
+//create a route that lets an admin add a problem 
+//ensure that only admin can add problems
+
 
 app.get('/profile', (req, res) => {
   
