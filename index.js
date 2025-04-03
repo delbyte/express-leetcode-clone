@@ -50,7 +50,30 @@ app.post('/signup', (req, res) => {
 
 app.post('/login', (req, res) => {
   //Add logic to decode body, body should have email and pw
+  if (req.body.email) {
+    if (req.body.password) {
+      if (USERS.includes(req.body.email)) {
+        const current_user = USERS.find(req.body.email)
+        if (req.body.password == current_user.password) {
+          res.send('Login successful.')
+        }
+        else {
+          res.send('Incorrect passoword')
+        }
+      }
+      
+      else {
+        res.send('Email does not exist in the system, please sign up!')
+      }
+    }
+    else {
+      res.send('Password not provided.')
+    }
+  }
 
+  else {
+    res.send('Email/Password not provided.')
+  }
 
 
   //Check if the users email exists in the user array, if not, tell user to signup or recheck email
