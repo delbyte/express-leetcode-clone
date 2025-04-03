@@ -1,3 +1,4 @@
+app.use(express.json())
 const express = require('express')
 const app = express()
 const port = 3000
@@ -26,6 +27,19 @@ app.get('/', (req, res) => {
 
 app.post('/signup', (req, res) => {
   //Add logic to decode body, body should have email and pw
+  if (req.body.email) {
+    if (USERS.includes(email)) {
+      res.send('User already exists.')
+    }
+    else {
+      USERS.push(req.body)
+      res.status(200).json({ message: "Signup successful!"});
+    }
+  }
+
+  else {
+    res.send('Email/Password not provided.')
+  }
   
 
 
