@@ -27,22 +27,22 @@ app.get('/', (req, res) => {
 
 app.post('/signup', (req, res) => {
   //Add logic to decode body, body should have email and pw
-  if (req.body.email) {
-    if (USERS.includes(email)) {
-      res.send('User already exists.')
-    }
-    else {
-      USERS.push(req.body)
-      res.status(200).json({ message: "Signup successful!"});
-    }
+  const {email, password} = req.body
+
+  if (!email || !password) {
+    res.status(400).json({ message: "Both the email and password are required."})
+  }
+
+  const userExists = USERS.some(user => user.email=== email)
+
+  if (userExists) {
+    return res.status(400).json({ message: "User already exists." })
   }
 
   else {
-    res.send('Email/Password not provided.')
+    USERS.push(req.body)
+    res.status(200).json({ message: "Signup successful!" })
   }
-  
-
-
   //Store email and pw as is in the users array for now in the USERS array above (only if the user with the given email doesn't exist)
 
   //return back 200 status code to the client 
@@ -54,11 +54,14 @@ app.post('/login', (req, res) => {
     if (req.body.password) {
       if (USERS.includes(req.body.email)) {
         const current_user = USERS.find(req.body.email)
+        
         if (req.body.password == current_user.password) {
-          res.send('Login successful.')
+          res.status(200).json({ message: "Login successful."})
+          res.send('User token: 30Y0Aq34OIajIDwdkcwa9')
         }
+        
         else {
-          res.send('Incorrect passoword')
+          res.status(401).json({ message: 'Incorrect passoword'})
         }
       }
       
@@ -66,6 +69,7 @@ app.post('/login', (req, res) => {
         res.send('Email does not exist in the system, please sign up!')
       }
     }
+
     else {
       res.send('Password not provided.')
     }
