@@ -61,7 +61,7 @@ app.post('/login', (req, res) => {
       const userExists = USERS.some(user => user.email === email)
 
       if (userExists) {
-        const current_user = USERS.find(req.body.email)
+        const current_user = USERS.find(user => user.email === req.body.email);
         
         if (req.body.password == current_user.password) {
           res.status(200).json({ message: "Login successful. User token: 30Y0Aq34OIajIDwdkcwa9"})
@@ -120,7 +120,7 @@ app.post('/addprob', (req, res) => {
     if (req.body.password) {
       const adminExists = ADMINS.some(admin => admin.email === email)
       if (adminExists) {
-        const current_admin = ADMINS.find(req.body.email)
+        const current_admin = ADMINS.find(admin => admin.email === req.body.email)
 
         if (req.body.password == current_admin.password) {
           res.status(200).json({ message: 'Admin login successful!'})
