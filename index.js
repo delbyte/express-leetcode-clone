@@ -58,7 +58,9 @@ app.post('/login', (req, res) => {
   //if its not the same return 401 back 
   if (req.body.email) {
     if (req.body.password) {
-      if (USERS.includes(req.body.email)) {
+      const userExists = USERS.some(user => user.email === email)
+
+      if (userExists) {
         const current_user = USERS.find(req.body.email)
         
         if (req.body.password == current_user.password) {
@@ -117,7 +119,8 @@ app.post('/addprob', (req, res) => {
   const {email, password, question} = req.body
   if (req.body.email) {
     if (req.body.password) {
-      if (ADMINS.includes(res.body.email)) {
+      const adminExists = ADMINS.some(admin => admin.email === email)
+      if (adminExists) {
         const current_admin = ADMINS.find(req.body.email)
 
         if (req.body.password == current_admin.password) {
@@ -142,20 +145,18 @@ app.post('/addprob', (req, res) => {
 
     }
     else {
-      
+      res.send('Please enter a password.')
     }
 
   }
 
   else {
-
+    res.send('Please enter an email.')
   }
-
-
-
 })
 
 app.get('/profile', (req, res) => {
+
   
 })
 
