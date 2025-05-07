@@ -64,8 +64,7 @@ app.post('/login', (req, res) => {
         const current_user = USERS.find(req.body.email)
         
         if (req.body.password == current_user.password) {
-          res.status(200).json({ message: "Login successful."})
-          res.send('User token: 30Y0Aq34OIajIDwdkcwa9')
+          res.status(200).json({ message: "Login successful. User token: 30Y0Aq34OIajIDwdkcwa9"})
         }
         
         else {
@@ -125,17 +124,14 @@ app.post('/addprob', (req, res) => {
 
         if (req.body.password == current_admin.password) {
           res.status(200).json({ message: 'Admin login successful!'})
-          res.send('Login successful.')
 
           QUESTIONS.push(req.body.question)
           res.status(200).json({ message: 'Admin question successfully posted!'})
-          res.send('Question post successful.')
 
         }
 
         else {
-          res.status(401).json({ message: 'Admin login unsuccessful!'})
-          res.send('Incorrect password.')
+          res.status(401).json({ message: 'Admin login unsuccessful, incorrect password!'})
         }
       }
 
