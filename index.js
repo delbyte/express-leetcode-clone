@@ -5,6 +5,8 @@ const port = 3000
 
 const USERS = [];
 
+const ADMINS = [];
+
 const QUESTIONS = [{
   title: "Two sum", 
   description: "Given an array containing two numbers, add them up and display the result.",
@@ -112,7 +114,36 @@ app.post('/submit', (req, res) => {
 //create a route that lets an admin add a problem 
 //ensure that only admin can add problems
 app.post('/addprob', (req, res) => {
-  
+  const {email, password, question} = req.body
+  if (req.body.email) {
+    if (req.body.password) {
+      if (ADMINS.includes(res.body.email)) {
+        const current_admin = ADMINS.find(req.body.email)
+
+        if (req.body.password == current_admin.password) {
+          res.status(200).json({ message: 'Admin login successful!'})
+          res.send('Login successful.')
+
+          QUESTIONS.push(req.body.question)
+          res.status(200).json({ message: 'Admin question successfully posted!'})
+          res.send('Question post successful.')
+
+        }
+      }
+      else {
+
+      }
+
+    }
+    else {
+
+    }
+
+  }
+
+  else {
+
+  }
 
 
 
