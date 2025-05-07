@@ -129,14 +129,20 @@ app.post('/addprob', (req, res) => {
           res.send('Question post successful.')
 
         }
-      }
-      else {
 
+        else {
+          res.status(401).json({ message: 'Admin login unsuccessful!'})
+          res.send('Incorrect password.')
+        }
+      }
+
+      else {
+        res.send('You are not an Admin. Please contact the moderators if you think this is a mistake.')
       }
 
     }
     else {
-
+      
     }
 
   }
