@@ -49,10 +49,8 @@ app.post('/signup', (req, res) => {
 
 app.post('/login', (req, res) => {
   //Add logic to decode body, body should have email and pw
-  
   //Check if the users email exists in the user array, if not, tell user to signup or recheck email
   //Also ensure that the pw is the same
-  
   //IF the pw is the same return 200 back to client and
   //also send back a (user) token (any random string will do for now)
   //if its not the same return 401 back 
@@ -91,24 +89,34 @@ app.post('/login', (req, res) => {
 
 app.get('/questions', (req, res) => {
   //Return the user all the questions in the QUESTIONS array
+  res.json(QUESTIONS);
   
 })
 
 app.get('/submit', (req, res) => {
   // return the users submission for this problem 
-  
+  res.json(SUBMISSIONS);
 })
 
 app.post('/submit', (req, res) => {
-  // let the users submit a problem, randomly accept or decline the solution
-  //store the submission in the SUBMISSIONS array 
+  // let the users submit a submission, randomly accept or decline the solution
+  // store the submission in the SUBMISSIONS array 
   
+  const {qno, submission} = req.body
+  SUBMISSIONS.push(req.body)
+  res.status(200).json({ message: 'Done'})
+
 })
 
 //hard todos
 //create a route that lets an admin add a problem 
 //ensure that only admin can add problems
+app.post('/addprob', (req, res) => {
+  
 
+
+
+})
 
 app.get('/profile', (req, res) => {
   
