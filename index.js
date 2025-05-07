@@ -107,7 +107,16 @@ app.post('/submit', (req, res) => {
   
   const {qno, submission} = req.body
   SUBMISSIONS.push(req.body)
-  res.status(200).json({ message: 'Done'})
+  res.status(200).json({ message: 'Submission sent.'})
+  
+  const passOrFail = Math.floor(Math.random()*2) 
+
+  if (passOrFail == 1) {
+    res.send('Your submission is correct!')
+  }
+  else {
+    res.send('Your submission is incorrect!')
+  }
 
 })
 
