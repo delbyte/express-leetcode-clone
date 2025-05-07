@@ -56,6 +56,9 @@ app.post('/login', (req, res) => {
   //IF the pw is the same return 200 back to client and
   //also send back a (user) token (any random string will do for now)
   //if its not the same return 401 back 
+
+  const {password, email} = req.body
+
   if (req.body.email) {
     if (req.body.password) {
       const userExists = USERS.some(user => user.email === email)
@@ -124,7 +127,9 @@ app.post('/submit', (req, res) => {
 //create a route that lets an admin add a problem 
 //ensure that only admin can add problems
 app.post('/addprob', (req, res) => {
+
   const {email, password, question} = req.body
+
   if (req.body.email) {
     if (req.body.password) {
       const adminExists = ADMINS.some(admin => admin.email === email)
